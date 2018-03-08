@@ -1,13 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Todo from './Todo'
 
 const todos = [
-  { text: 'Trepar a un arbol', completed: false },
-  { text: 'Ver un ovni', completed: true },
-  { text: 'Aprender a cultivar tomates', completed: false },
-  { text: 'Hornear pan', completed: false },
-  { text: 'Saltar en paracaidas', completed: true },
+  { id: 1, text: 'Trepar a un arbol', completed: false },
+  { id: 2, text: 'Ver un ovni', completed: true },
+  { id: 3, text: 'Aprender a cultivar tomates', completed: false },
+  { id: 4, text: 'Hornear pan', completed: false },
+  { id: 5, text: 'Saltar en paracaidas', completed: true },
 ]
 
 const TodoList = () => (
@@ -20,13 +19,5 @@ const TodoList = () => (
     )}
   </ul>
 )
-
-TodoList.propTypes = {
-  todos: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    completed: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired
-  }).isRequired).isRequired
-}
 
 export default TodoList
