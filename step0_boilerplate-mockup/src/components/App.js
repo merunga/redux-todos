@@ -1,11 +1,11 @@
 import React from 'react'
 
 const todos = [
-  { text: 'Trepar a un arbol', completed: false },
-  { text: 'Ver un ovni', completed: true },
-  { text: 'Aprender a cultivar tomates', completed: false },
-  { text: 'Hornear pan', completed: false },
-  { text: 'Saltar en paracaidas', completed: true },
+  { id: 1, text: 'Trepar a un arbol', completed: false },
+  { id: 2, text: 'Ver un ovni', completed: true },
+  { id: 3, text: 'Aprender a cultivar tomates', completed: false },
+  { id: 4, text: 'Hornear pan', completed: false },
+  { id: 5, text: 'Saltar en paracaidas', completed: true },
 ]
 
 const App = () => (
@@ -21,8 +21,9 @@ const App = () => (
       </form>
     </div>
     <ul>
-      {todos.map(({ text, completed }) =>
+      {todos.map(({ id, text, completed }) =>
         <li
+          key={id}
           style={{
             textDecoration: completed ? 'line-through' : 'none',
             marginBottom: 5
@@ -39,7 +40,7 @@ const App = () => (
     </ul>
     <p>
       <b>Mostrar:</b>
-      {" "}      
+      {" "}
         Todos
       {", "}
       <a href="#">
