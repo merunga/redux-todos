@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { addTodo as addTodoActionCreator } from '../actions'
 import AddTodoComponent from '../components/AddTodoInput'
