@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { createStore } from 'redux'
 import { connect, Provider } from 'react-redux'
+import './index.css' 
 
 
 const calcState = {
