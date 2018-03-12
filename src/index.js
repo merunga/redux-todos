@@ -2,95 +2,79 @@ import React from 'react'
 import { render } from 'react-dom'
 import { createStore } from 'redux'
 import { connect, Provider } from 'react-redux'
+import { Component } from 'react';
+import store from './store/index'
 import './index.css' 
 
+class Prueba extends Component {
+  constructor(props){
+    super(props)
+  }
 
-const calcState = {
-    value: 0,
-    btns: [ "1", "2", "3", "C", "4", "5", "6", "=", "7", "8", "9", ".", "+", "0", "-", "*", "/" ]
-} 
-
-const calcReducer = (state = calcState, action) => {
-    switch(action.type){
-        case 'ADD_ELEM':
-            return{
-                ...state,
-                value: state.value == 0 ? action.text : state.value + action.text
-            }
-        case 'CLEAR':
-            return{
-                ...state,
-                value: 0
-            }
-        case 'EQUAL':
-            return{
-                ...state,
-                value: eval(action.value)
-            }
-        default:
-            return state;
-    }
-}
-const App = ({ value, btns, addElem, clear, equal }) => {
+  render() {
+    const { 
+      value, 
+      numbers, 
+      showElem, 
+      emptyNum, 
+      evalString } = this.props;
   return (
-    <div className="App">
+    <div className="App" disabled>
       <div className="value-container">
         <input type="text" value={value} />
       </div>
       <div className="buttons-container">
-        {btns.map((item, key) => {
+        {numbers.map((item, key) => {
           if(item == "C"){
             return(
-              <button onClick={ clear.bind(this) } key={key}>{item}</button>
+              <button key={key} onClick={ emptyNum.bind(this) }>{item}</button>
             )
-          } else if(item == "="){
+          } else if(item === "="){
             return(
-              <button onClick={ equal.bind(this, value) } key={key}>{item}</button>
+              <button key={key} onClick={ evalString.bind(this, value) }>{item}</button>
             )
           } else {
             return(
-              <button onClick={ addElem.bind(this, item) } key={key}>{item}</button>
+              <button key={key} onClick={ showElem.bind(this, item) }>{item}</button>
             )
           }
         })}
       </div>
     </div>
   );
-
+}
 }
 
-const mapStateToProps = (state) => {
+const stateP = (state) => {
   return{
     value: state.value,
-    btns: state.btns
+    numbers: state.numbers
   }
 }
-const mapDispatchToProps = (dispatch) => {
+const dispatchP = (dispatch) => {
   return{
-    addElem: (text) => {
+    showElem: (text) => {
       dispatch({
-        type: 'ADD_ELEM',
+        type: 'SHOW_ELEM',
         text
       })
     },
-    clear: () => {
+    emptyNum: () => {
       dispatch({
-        type: 'CLEAR'
+        type: 'EMPTY_NUM'
       })
     },
-    equal: (value) => {
+    evalString: (value) => {
       dispatch({
-        type: 'EQUAL',
+        type: 'EVAL_STRING',
         value
       })
     }
   }
 }
 
-const Calc = connect(mapStateToProps, mapDispatchToProps)(App);
+const Calc = connect(stateP, dispatchP)(Prueba);
 
-
-const store = createStore(calcReducer);
 
 render(
     <Provider store={store}>
