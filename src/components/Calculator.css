@@ -1,0 +1,12 @@
+.calculator {
+  border: 1px solid #8e8e8e;
+  border-radius: 6px;
+  box-shadow: 10px 15px 34px -5px #595959; 
+  margin: 100px auto;
+  overflow: hidden;
+  width: 228px;
+}
+
+.equal {
+  width: 100%;
+}

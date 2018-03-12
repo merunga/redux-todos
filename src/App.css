@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+}
+
+.w30{
+  width: 40%;
+}
+
+.h100{
+  height: 100vh;
+}
+
+.border{
+  border: .5px solid rgb(197, 197, 197);
+}
+
+.orange {
+  background-color: rgb(255, 201, 51);
+}
+
+.bg-red{
+  background-color: #FC466B;
+}
+.bg-grey{
+  background-color: #575A69;
+  color: white;
+}
+
+.font-1{
+  font-size: 2em;
+}
+
+.radius{
+  border-radius: 10px;
+}
