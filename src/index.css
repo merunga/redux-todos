@@ -1,0 +1,11 @@
+* {
+    font-family: "Helvetica Neue", sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-image: url(http://www.tokkoro.com/picsup/2990242-code-web-development-php___mixed-wallpapers.jpg);
+}
