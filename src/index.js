@@ -1,80 +1,83 @@
-import React from "react";
-import "./App.css";
-import { render } from "react-dom";
-import { connect} from "react-redux";
-import nose from "./store/";
-import calcReducer from "./store/";
+import React from 'react'
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { connect, Provider } from 'react-redux'
+import { Component } from 'react';
+import store from './store/index'
+import './index.css' 
 
+class Prueba extends Component {
+  constructor(props){
+    super(props)
+  }
 
-function Prueba (props) {
-  console.log(props.btns)
-  console.log(props)
+  render() {
+    const { 
+      value, 
+      numbers, 
+      showElem, 
+      emptyNum, 
+      evalString } = this.props;
   return (
-    <div className="App">
+    <div className="App" disabled>
       <div className="value-container">
-        <input type="text" value={props.value} />
+        <input type="text" value={value} />
       </div>
       <div className="buttons-container">
-        {props.btns.map((item, key) => {
-          if (item === "C") {
-            return (
-              <button onClick={props.clear.bind(this)} key={key}>
-                {item}
-              </button>
-            );
-          } else if (item === "=") {
-            return (
-              <button onClick={props.equal.bind(this, props.value)} key={key}>
-                {item}
-              </button>
-            );
+        {numbers.map((item, key) => {
+          if(item == "C"){
+            return(
+              <button key={key} onClick={ emptyNum.bind(this) }>{item}</button>
+            )
+          } else if(item === "="){
+            return(
+              <button key={key} onClick={ evalString.bind(this, value) }>{item}</button>
+            )
           } else {
-            return (
-              <button onClick={props.addElem.bind(this, item)} key={key}>
-                {item}
-              </button>
-            );
+            return(
+              <button key={key} onClick={ showElem.bind(this, item) }>{item}</button>
+            )
           }
         })}
       </div>
     </div>
   );
-};
+}
+}
 
-const mapStateToProps = (state) => {
-  console.log('estadp',state)
-  return {
+const stateP = (state) => {
+  return{
     value: state.value,
-    btns: state.btns
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addElem: text => {
+    numbers: state.numbers
+  }
+}
+const dispatchP = (dispatch) => {
+  return{
+    showElem: (text) => {
       dispatch({
-        type: "ADD_ELEM",
+        type: 'SHOW_ELEM',
         text
-      });
+      })
     },
-    clear: () => {
+    emptyNum: () => {
       dispatch({
-        type: "CLEAR"
-      });
+        type: 'EMPTY_NUM'
+      })
     },
-    equal: value => {
+    evalString: (value) => {
       dispatch({
-        type: "EQUAL",
+        type: 'EVAL_STRING',
         value
-      });
+      })
     }
-  };
-};
+  }
+}
+
+const Calc = connect(stateP, dispatchP)(Prueba);
+
 
 render(
-  <div >
-    <Prueba store={nose} />
-  </div>,
-  document.getElementById("root")
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Prueba);
+    <Provider store={store}>
+        <Calc />
+    </Provider>
+    , document.getElementById('root'));
